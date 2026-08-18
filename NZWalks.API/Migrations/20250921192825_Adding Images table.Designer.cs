@@ -11,16 +11,16 @@ using NZWalks.API.Data;
 
 namespace NZWalks.API.Migrations
 {
-    [DbContext(typeof(NZWalksDBContext))]
-    [Migration("20260808032129_Seeding the Data")]
-    partial class SeedingtheData
+    [DbContext(typeof(NZWalksDbContext))]
+    [Migration("20250921192825_Adding Images table")]
+    partial class AddingImagestable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.29")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -57,6 +57,35 @@ namespace NZWalks.API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NZWalks.API.Models.Domain.Image", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("FileSizInBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("NZWalks.API.Models.Domain.Region", b =>
                 {
                     b.Property<Guid>("Id")
@@ -84,7 +113,7 @@ namespace NZWalks.API.Migrations
                             Id = new Guid("f7248fc3-2585-4efb-8d1d-1c555f4087f6"),
                             Code = "AKL",
                             Name = "Auckland",
-                            RegionImageUrl = "https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg"
+                            RegionImageUrl = "https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         },
                         new
                         {
@@ -97,6 +126,26 @@ namespace NZWalks.API.Migrations
                             Id = new Guid("14ceba71-4b51-4777-9b17-46602cf66153"),
                             Code = "BOP",
                             Name = "Bay Of Plenty"
+                        },
+                        new
+                        {
+                            Id = new Guid("cfa06ed2-bf65-4b65-93ed-c9d286ddb0de"),
+                            Code = "WGN",
+                            Name = "Wellington",
+                            RegionImageUrl = "https://images.pexels.com/photos/4350631/pexels-photo-4350631.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        },
+                        new
+                        {
+                            Id = new Guid("906cb139-415a-4bbb-a174-1a1faf9fb1f6"),
+                            Code = "NSN",
+                            Name = "Nelson",
+                            RegionImageUrl = "https://images.pexels.com/photos/13918194/pexels-photo-13918194.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        },
+                        new
+                        {
+                            Id = new Guid("f077a22e-4248-4bf6-b564-c7cf4e250263"),
+                            Code = "STL",
+                            Name = "Southland"
                         });
                 });
 
@@ -106,10 +155,14 @@ namespace NZWalks.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("DifficultyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("LengthInKM")
+                    b.Property<double>("LengthInKm")
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
@@ -129,33 +182,6 @@ namespace NZWalks.API.Migrations
                     b.HasIndex("RegionId");
 
                     b.ToTable("Walks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7e0f4b3a-1c9d-4a2e-9f52-3b8c1d0e6a74"),
-                            DifficultyId = new Guid("ea294873-7a8c-4c0f-bfa7-a2eb492cbf8c"),
-                            LengthInKM = 5.5,
-                            Name = "Rangitoto Island Summit Track",
-                            RegionId = new Guid("f7248fc3-2585-4efb-8d1d-1c555f4087f6"),
-                            WalkImageUrl = "https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg"
-                        },
-                        new
-                        {
-                            Id = new Guid("2d5a9c81-6b34-4e7f-a1c8-9d02f4b5e3a6"),
-                            DifficultyId = new Guid("f808ddcd-b5e5-4d80-b732-1ca523e48434"),
-                            LengthInKM = 12.0,
-                            Name = "Cape Reinga Coastal Walk",
-                            RegionId = new Guid("6884f7d7-ad1f-4101-8df3-7a6fa7387d81")
-                        },
-                        new
-                        {
-                            Id = new Guid("b3c17e59-8a4d-42f6-b0e1-5c7d9a2f8b40"),
-                            DifficultyId = new Guid("54466f17-02af-48e7-8ed3-5a4a8bfacf6f"),
-                            LengthInKM = 3.3999999999999999,
-                            Name = "Mount Maunganui Base Track",
-                            RegionId = new Guid("14ceba71-4b51-4777-9b17-46602cf66153")
-                        });
                 });
 
             modelBuilder.Entity("NZWalks.API.Models.Domain.Walk", b =>

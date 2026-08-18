@@ -1,22 +1,19 @@
 ﻿namespace NZWalks.API.Models.DTO
 {
-    public class RegionDTO
+    public class RegionDtoV1
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
         public string Code { get; set; }
-        public string? RegionImageUrl { get; set; } 
-    }
-    public class UpdateRegionDTO
-    {
         public string Name { get; set; }
-        public string Code { get; set; }
         public string? RegionImageUrl { get; set; }
     }
-    public class AddRegionDTO
+
+    public class RegionDtoV2
     {
-        public string Name { get; set; }
+        public Guid Id { get; set; }
         public string Code { get; set; }
+        public string Name { get; set; }
         public string? RegionImageUrl { get; set; }
+        public bool HasImage { get; set; }
     }
 }

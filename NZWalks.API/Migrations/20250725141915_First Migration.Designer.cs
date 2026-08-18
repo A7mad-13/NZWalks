@@ -11,16 +11,16 @@ using NZWalks.API.Data;
 
 namespace NZWalks.API.Migrations
 {
-    [DbContext(typeof(NZWalksDBContext))]
-    [Migration("20260805173635_InitialMigration")]
-    partial class InitialMigration
+    [DbContext(typeof(NZWalksDbContext))]
+    [Migration("20250725141915_First Migration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.29")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -68,10 +68,14 @@ namespace NZWalks.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("DifficultyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("LengthInKM")
+                    b.Property<double>("LengthInKm")
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
