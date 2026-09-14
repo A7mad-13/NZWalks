@@ -1,4 +1,4 @@
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +25,7 @@ var logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .CreateLogger();
 
-builder.Logging.ClearProviders();
+builder.Logging.ClearProviders(); // this line removes all the default logging providers such as Console, Debug, EventSource, etc.
 builder.Logging.AddSerilog(logger);
 
 
@@ -53,8 +53,10 @@ builder.Services.AddSwaggerGen( options =>
     { 
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = JwtBearerDefaults.AuthenticationScheme
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Description = "Paste ONLY the JWT here. Swagger adds the 'Bearer ' prefix for you."
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement

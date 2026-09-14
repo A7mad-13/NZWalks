@@ -37,6 +37,7 @@ namespace NZWalks.API.Controllers
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAllV1()
         {
+            throw new Exception("Exception Occured in GetAllV1");
             Logger.LogInformation("GET All Regions Action Invoked");
             var regions = await regionRepositry.GetAllAsync();
 

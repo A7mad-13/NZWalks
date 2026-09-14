@@ -23,14 +23,20 @@ namespace NZWalks.API.Middlewares
             }
             catch(Exception ex)
             {
-                var errorId = new Guid();
+                var errorId = Guid.NewGuid();
 
                 //Log the exception
                 logger.LogError(ex, $"{errorId} : {ex.Message}");
 
+                //If the response has already started, we cannot rewrite it - rethrow
+                //and let the server abort the connection.
+                if (context.Response.HasStarted)
+                {
+                    throw;
+                }
+
                 //Return custom error response
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "Aplication/json";
 
                 var error = new 
                 {

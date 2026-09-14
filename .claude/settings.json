@@ -1,0 +1,45 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/NZWalks/.claude/hooks/block-migration-edits.sh",
+            "shell": "bash",
+            "timeout": 15,
+            "statusMessage": "Checking EF migration file guard..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/NZWalks/.claude/hooks/build-check-post-edit.sh",
+            "shell": "bash",
+            "timeout": 120,
+            "statusMessage": "Rebuilding NZWalks.API to check for compiler errors..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/NZWalks/.claude/hooks/build-gate-stop.sh",
+            "shell": "bash",
+            "timeout": 120,
+            "statusMessage": "Verifying the solution still builds before ending the turn..."
+          }
+        ]
+      }
+    ]
+  }
+}
