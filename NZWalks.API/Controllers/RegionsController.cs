@@ -8,7 +8,7 @@ using NZWalks.API.CustomActionFilter;
 using NZWalks.API.Data;
 using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.DTO;
-using NZWalks.API.Respositries;
+using NZWalks.API.Repositories;
 using System.Text.Json;
 
 namespace NZWalks.API.Controllers
@@ -19,12 +19,12 @@ namespace NZWalks.API.Controllers
     [ApiVersion(2.0)]
     public class RegionsController : ControllerBase
     {
-        private readonly IRegionRespository regionRepositry;
+        private readonly IRegionRepository regionRepositry;
         private readonly IMapper mapper;
 
         public ILogger<RegionsController> Logger { get; }
 
-        public RegionsController(IRegionRespository regionRepositry, IMapper mapper, ILogger<RegionsController> logger)
+        public RegionsController(IRegionRepository regionRepositry, IMapper mapper, ILogger<RegionsController> logger)
         {
             this.regionRepositry = regionRepositry;
             this.mapper = mapper;
