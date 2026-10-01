@@ -5,7 +5,7 @@ using NZWalks.API.CustomActionFilter;
 using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.DTO;
 using NZWalks.API.Models.Pagination_Result;
-using NZWalks.API.Respositries;
+using NZWalks.API.Repositories;
 
 namespace NZWalks.API.Controllers
 {

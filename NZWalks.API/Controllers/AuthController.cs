@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NZWalks.API.CustomActionFilter;
 using NZWalks.API.Models.DTO;
-using NZWalks.API.Respositries;
+using NZWalks.API.Repositories;
 
 namespace NZWalks.API.Controllers
 {

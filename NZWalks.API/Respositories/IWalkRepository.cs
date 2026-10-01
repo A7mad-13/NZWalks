@@ -1,7 +1,7 @@
 ﻿using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.Pagination_Result;
 
-namespace NZWalks.API.Respositries
+namespace NZWalks.API.Repositories
 {
     public interface IWalkRepository
     {
